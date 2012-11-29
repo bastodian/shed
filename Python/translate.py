@@ -6,6 +6,7 @@
 '''
 
 from sys import argv
+from sys import stdout
 from Bio import SeqIO, Seq
 from Bio.Alphabet import generic_dna
 
@@ -17,7 +18,7 @@ with open(InFile, 'rU') as FastaFile:
         RevComp = Seq.Seq(str(record.seq), generic_dna).reverse_complement() 
         while ReadFrame <= 1:
             ReadFrame += 1
-            print '>%s_RF:%s\n%s' % (str(record.name), str(ReadFrame), \
-                    Seq.Seq(str(record.seq[ReadFrame:]), generic_dna).translate()) 
-            print '>%s_revCompRF:%s\n%s' % (str(record.name), str(ReadFrame), \
-                    Seq.Seq(str(RevComp[ReadFrame:]), generic_dna).translate())
+            stdout.write('>%s_RF:%s\n%s\n' % (str(record.name), str(ReadFrame), \
+                    Seq.Seq(str(record.seq[ReadFrame:]), generic_dna).translate()))
+            stdout.write('>%s_revCompRF:%s\n%s\n' % (str(record.name), str(ReadFrame), \
+                    Seq.Seq(str(RevComp[ReadFrame:]), generic_dna).translate()))
