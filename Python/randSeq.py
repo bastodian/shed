@@ -56,12 +56,8 @@ def RandSampler(fname, random):
                 else:
                     continue
 
-if __name__ == '__main__':
-    filein1 = sys.argv[1]
-    filein2 = sys.argv[2]
-    combined = sys.argv[3]
-    SampleSize = int(sys.argv[4])
 
+def main(filein1, filein2, combined, SampleSize):
     SeqCount = interleave(filein1, filein2, combined)
     List = range(0, SeqCount, 2)
     shuffle(List)
@@ -72,3 +68,6 @@ if __name__ == '__main__':
     interleave(filein1, filein2, combined)
 
     os.system('rm %s' % (combined))
+
+
+main(sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]))
