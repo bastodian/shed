@@ -10,14 +10,16 @@ import screed
 def fixseqs(filein, fileout):
 
     fw = open(fileout, 'w')
-    line1 = filein.readline()
+    fi = open(filein, 'r')
+    line1 = fi.readline()
     
     #Does line 1 correspond to FASTA?
     if line1[0] == '>':
         for n, record in enumerate(screed.open(filein)):
             name = record['name']
             sequence = record['sequence']
-            fw.write('>%s\n%s' % (name, sequence))
+            fw.write('>%s\n%s\n' % (name, sequence))
+            #print name, "\n", sequence
     #Does line 1 correspond to FASTQ?
     elif line1[0] == '@':
         for n, record in enumerate(screed.open(filein)):
@@ -32,5 +34,5 @@ def fixseqs(filein, fileout):
                 > (fasta) or @ (fastq)?'
     fw.close()
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     fixseqs(sys.argv[1], sys.argv[2])
